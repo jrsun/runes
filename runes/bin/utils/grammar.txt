@@ -1,0 +1,57 @@
+BUGS:
+try entering "/blue bob: hi"
+rooms with spaces in name ~
+room with empty name ~
+server stops responding randomly
+multiple message concurrency
+spells don't show up immediately
+duplicate users?
+JOINING ROOMS MULTIPLE TIMES
+closing window doesn't close window
+log requests and responses
+
+wrap mainGUI in invokeLater
+
+
+CHANGELOG:
+setFocusable false for applet
+check for nul host port user or spaces
+synchronized handlerequest/response
+message on DC
+some ready shit
+
+Grammar for Client to Server Communication:
+
+CLIENT_MESSAGE := BODY | DEBUG_MSG
+USERNAME := "[a-zA-Z0-9_]+"
+ROOMNAME := "[a-zA-Z0-9_]+"
+BODY := one of these messages
+JOIN_MSG := "join" ROOMNAME
+READY_MSG := "ready" ROOMANME
+PLACE_MSG := "place ROOMNAME" X Y
+SURRENDER_MSG := "surrender" ROOMNAME
+TEXT_MSG := "text ROOMNAME .+"
+LIST_ROOMS = "list_rooms"
+LIST_PLAYerS = "list_players ROOMNAME"
+LEAVE_MSG := "join lobby"
+DEBUG_MSG := "debug" BLAH
+BLAH := "room_list" |
+	"board_state" ROOMNAME |
+	"room_state" ROOMNAME |
+	"player_state"
+
+Grammar for Server to Client Communication:
+
+SPELLS := "spells ROOMNAME FIRST/SECOND LIST_SPELLS"
+END_MESSAGE := "end ROOMNAME"
+READY_PLAYERS := "first P1" | "second P2"
+START_MESSGAE := "start ROOMNAME"
+ERROR_MESSAGE := "invalid"
+SERVER_MESSAGE := BOARD | PLAYER_WIN | PLAYER_TURN | PLAYER_STATUS | TEXT_MSG
+LIST_ROOMS := "rooms" ROOMS
+LIST_PLAYERS := "players ROOMNAME" PLAYERS "first PLAYER second PLAYER"
+TEXT_MSG := "text" SENDER ROOMNAME".+"
+BOARD := "board ROOMNAME" [SQUARE+]+
+PLAYER_WIN := "win ROOMANME" USERNAME
+PLAYER_TURN := "turn ROOMNAME" USERNAME
+PLAYER_STATUS := "status ROOMNAME" P1NAME P1HP P1MP P2NAME P2HP P2MP
